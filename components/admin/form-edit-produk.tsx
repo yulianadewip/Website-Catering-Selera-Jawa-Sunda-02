@@ -1,6 +1,6 @@
 "use client";
 
-import { tambahProduk } from "@/lib/action";
+import { updateProduk } from "@/lib/action";
 import { useFormState } from "react-dom";
 import { IoCloudUploadOutline, IoTrashOutline } from "react-icons/io5"
 import { useRef, useState, useTransition } from "react";
@@ -9,11 +9,12 @@ import { type PutBlobResult } from "@vercel/blob";
 import Image from "next/image";
 import clsx from "clsx";
 import { BarLoader } from "react-spinners";
+import { Produk } from "@/app/generated/prisma/client";
 import Link from "next/link";
 
-export default function FormAddProduk() {
+export default function ProdukEditForm({ id, produk }: { id: string, produk: Produk }) {
     const inputFileRef = useRef<HTMLInputElement>(null);
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(produk.image);
     const [message, setMessage] = useState("");
     const [pending, startTransition] = useTransition();
 
@@ -54,17 +55,18 @@ export default function FormAddProduk() {
         })
     }
 
-    const [state, formAction, isPending] = useActionState(tambahProduk.bind(null, image), null);
+    const [state, formAction, isPending] = useActionState(updateProduk.bind(null, image, id), null);
 
     return (
         <div>
-            <h1 className="text-black text-2xl font-bold">Tambah Produk</h1>
+            <h1 className="text-black text-2xl font-bold">Produk Edit Form</h1>
             <form action={formAction}>
                 <div className="mb-5">
                     <label htmlFor="nama" className="block text-sm font-medium text-gray-900">Nama</label>
                     <input type="text"
                         id="nama"
                         name="nama"
+                        defaultValue={produk.nama}
                         placeholder="masukkan nama...." className="bg-gray-50 border border-gray-300 text-gray-900
                                 rounded-sm focus:ring-blue-500focus:border-blue-500 block w-full p-2.5"
                     />
@@ -78,6 +80,7 @@ export default function FormAddProduk() {
                     <input type="text"
                         id="deskripsi"
                         name="deskripsi"
+                        defaultValue={produk.deskripsi}
                         placeholder="masukkan deskripsi...." className="bg-gray-50 border border-gray-300 text-gray-900
                                 rounded-sm focus:ring-blue-500focus:border-blue-500 block w-full p-2.5"
                     />
@@ -91,6 +94,7 @@ export default function FormAddProduk() {
                     <input type="text"
                         id="harga"
                         name="harga"
+                        defaultValue={produk.harga}
                         placeholder="masukkan harga...." className="bg-gray-50 border border-gray-300 text-gray-900
                                 rounded-sm focus:ring-blue-500focus:border-blue-500 block w-full p-2.5"
                     />
@@ -138,14 +142,14 @@ export default function FormAddProduk() {
                     </div>
                 ) : null}
 
-                <div className="flex gap-4">
+                <div className="flex gap-2">
                     <button type="submit" className={clsx("bg-red-600 text-white w-full hover:bg-red-400 py-2.5 px-6 md:px-10 text-lg font-semibold cursor-pointer", {
                         "opacity-50 cursor-progress": isPending
                     })} disabled={isPending}>
-                        {isPending ? "Saving..." : "Save"}
+                        {isPending ? "Updating..." : "Update"}
                     </button>
 
-                    <Link href="/admin/produk" className=" flex justify-center items-center bg-gray-500 text-white w-full hover:bg-gray-400 py-2.5 px-6 md:px-10 text-lg font-semibold cursor-pointer">
+                    <Link href="/admin/produk" className="flex justify-center items-center bg-gray-500 text-white w-full hover:bg-gray-400 py-2.5 px-6 md:px-10 text-lg font-semibold cursor-pointer">
                         Cancel
                     </Link>
                 </div>

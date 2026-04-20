@@ -30,7 +30,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <SessionProvider session={session}>
-          {/* <Navbar/> */}
+          <Navbar/>
           <main className="bg-gray-50 min-h-screen">
             {children}
           </main>

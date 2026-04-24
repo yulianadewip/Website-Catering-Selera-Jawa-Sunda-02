@@ -63,7 +63,7 @@ export default async function PesananTable() {
             </div>
 
             {/* ===================== TABEL DIBATALKAN ===================== */}
-            {pesananDibatalkan.length > 0 && (
+            {pesananDibatalkan.length > 0 || pesananSelesai.length > 0 && (
                 <div className="bg-white p-4 mt-8 shadow-sm">
                     <h2 className="text-lg font-semibold mb-3 text-red-500">Pesanan Dibatalkan & Selesai</h2>
                     <table className="w-full divide-y divide-gray-200">

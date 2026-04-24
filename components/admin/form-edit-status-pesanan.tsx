@@ -61,7 +61,7 @@ export default function FormValidasiSkripsi({
                 <div className="flex gap-3 p-4 border-t">
 
                     <Link
-                        href="/prodi/validasi"
+                        href="/admin/dashboard"
                         className="bg-gray-500 hover:bg-gray-600 text-white w-full py-2.5 text-center font-semibold rounded-md"
                     >
                         Kembali

@@ -28,34 +28,52 @@ export default function Navlink() {
             </button>
             <div className={clsx("w-full md:block md:w-auto", { "hidden": !open })}>
                 <ul className="flex flex-col font-semibold text-sm uppercase p-4 mt-4 rounded-sm bg-gray-50 md:flex-row md:items-center md:space-x-10 md:p-0 md:mt-0 md:border-0 md:bg-white">
-                    <li><Link href="/" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Home</Link></li>
-                    <li><Link href="/produk" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Produk</Link></li>
-                    <li><Link href="/info-pemesanan" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Info Pemesanan</Link></li>
-                    <li><Link href="/testimoni" className="block py-2 px-3 text-gray-800 hover:text-red-500 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Testimoni</Link></li>
 
-                    {session && (
+                    {/* 🔓 BELUM LOGIN atau USER */}
+                    {(!session || session.user.role === "user") && (
                         <>
-
-                            {session.user.role === "user" && (
-                                <li><Link href="/pesanan-saya" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Pesanan Saya</Link></li>
-                            )}
-
-                            {session.user.role === "admin" && (
-                                <>
-                                    <li><Link href="/admin/dashboard" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Dashboard</Link></li>
-                                    <li><Link href="/admin/produk" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Manage Produk</Link></li>
-                                </>
-                            )}
+                            <li><Link href="/" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Home</Link></li>
+                            <li><Link href="/produk" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">Produk</Link></li>
                         </>
                     )}
 
+                    {/* 👤 USER */}
+                    {session?.user.role === "user" && (
+                        <li>
+                            <Link href="/pesanan-saya" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">
+                                Pesanan Saya
+                            </Link>
+                        </li>
+                    )}
+
+                    {/* 🛠 ADMIN */}
+                    {session?.user.role === "admin" && (
+                        <>
+                            <li>
+                                <Link href="/admin/dashboard" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">
+                                    Dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/admin/produk" className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0">
+                                    Manage Produk
+                                </Link>
+                            </li>
+                        </>
+                    )}
+
+                    {/* 🔑 AUTH BUTTON */}
                     {session ? (
                         <li className="pt-2 md:pt-0">
-                            <button onClick={() => signOut()} className="md:hidden py-2.5 px-4 bg-red-400 text-white hover:bg-red-600 rounded-sm cursor-pointer">Sign Out</button>
+                            <button onClick={() => signOut()} className="md:hidden py-2.5 px-4 bg-red-400 text-white hover:bg-red-600 rounded-sm cursor-pointer">
+                                Sign Out
+                            </button>
                         </li>
                     ) : (
                         <li className="pt-2 md:pt-0">
-                            <Link href="/signin" className="py-2.5 px-6 bg-red-400 text-white hover:bg-red-600 rounded-sm cursor-pointer">Sign In</Link>
+                            <Link href="/signin" className="py-2.5 px-6 bg-red-400 text-white hover:bg-red-600 rounded-sm cursor-pointer">
+                                Sign In
+                            </Link>
                         </li>
                     )}
                 </ul>

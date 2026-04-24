@@ -53,17 +53,18 @@ model Produk {
 
 model Pesanan {
   id                String   @id @default(cuid())
-  userId            String
   produkId          String
   jumlah            Int
   tanggal           DateTime
-  email             String
-  phone             String
-  lokasi_pengiriman String
   keterangan        String
-  status            String   @default("preorder")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  email             String
+  lokasi_pengiriman String
+  phone             String
+  status            String   @default("preorder")
+  userId            String
   produk            Produk   @relation(fields: [produkId], references: [id], onDelete: Cascade)
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+

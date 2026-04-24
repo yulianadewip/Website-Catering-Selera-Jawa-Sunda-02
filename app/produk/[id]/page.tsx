@@ -8,6 +8,7 @@ export default async function ProdukDetailPage(
 ) {
     const id = (await params).id;
 
+
     return (
         <div className="mt-16">
             <Suspense fallback={<div>Loading...</div>}>

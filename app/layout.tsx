@@ -31,7 +31,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <SessionProvider session={session}>
           <Navbar/>
-          <main className="bg-gray-50 min-h-screen">
+          <main className="bg-[#f1ece1] min-h-screen">
             {children}
           </main>
         </SessionProvider>

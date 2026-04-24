@@ -5,9 +5,9 @@ import { notFound } from "next/navigation";
 export default async function MainCard() {
     const produk = await getProduk();
 
-    if(!produk) return notFound();
+    if (!produk) return notFound();
     return (
-        <div className="max-w-7xl py-6 pb-20 px-4 mx-auto">
+        <div className="max-w-4xl bg-brown-400 py-6 pb-20 px-4 mx-auto">
             <div className="grid gap-7 md:grid-cols-3">
                 {produk.map((produk) => (
                     <Card key={produk.id} produk={produk} />

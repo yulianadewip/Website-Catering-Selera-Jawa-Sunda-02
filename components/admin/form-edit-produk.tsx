@@ -111,7 +111,7 @@ export default function ProdukEditForm({ id, produk }: { id: string, produk: Pro
                             {pending ? <BarLoader /> : null}
 
                             {image ? (
-                                <button type="button" onClick={() => deleteImage(image)} className="flex items-center justify-center bg-transparent size-6 rounded-sm absolute right-1 top-1 text-white hover:bg-red-400"><IoTrashOutline className="size-4 text-transparent hover:text-white" /></button>
+                                <button type="button" onClick={() => deleteImage(image)} className="flex items-center justify-center bg-transparent size-6 rounded-sm absolute right-1 top-1 text-red-400 hover:bg-red-400"><IoTrashOutline className="size-10 hover:text-white" /></button>
                             ) : (
                                 <div className="flex flex-col items-center justify-center">
                                     <IoCloudUploadOutline className="size-8" />

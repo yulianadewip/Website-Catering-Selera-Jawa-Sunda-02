@@ -22,23 +22,33 @@ export default async function MyReserveList() {
                     </div>
 
                     <div className="flex flex-col mb-4 items-start bg-white rounded-sm gap-2 md:flex-row md:w-full">
-                        <Image
-                            src={item.produk.image}
-                            width={500}
-                            height={300}
-                            className="object-cover w-full rounded-t-sm h-60 md:h-auto md:w-1/3 md:rounded-none md:rounded-s-sm"
-                            alt="Image Produk"
-                        />
+                        <div className="relative w-full md:w-1/3 aspect-[4/3]">
+                            <Image
+                                src={item.produk.image}
+                                fill
+                                className="object-cover rounded-t-sm md:rounded-none md:rounded-l-sm"
+                                alt="Image Produk"
+                            />
+                        </div>
 
-                        <div className="flex items-center gap-1 mb-3 font-normal w-full text-gray-700">
+                        <div className="flex items-center p-5 gap-1 mb-3 font-normal w-full text-gray-700">
                             <div className="w-full">
+                                <div className="flex items-center justify-between text-sm font-medium text-gray-900 truncate">
+                                    <span>Nama Paket:</span>
+                                    <span>{item.produk.nama}</span>
+                                </div>
                                 <div className="flex items-center justify-between text-sm font-medium text-gray-900 truncate">
                                     <span>Price:</span>
                                     <span>{formatCurrency(item.produk.harga)}</span>
                                 </div>
 
                                 <div className="flex items-center justify-between text-sm font-medium text-gray-900 truncate">
-                                    <span>Tanggal Pesan:</span>
+                                    <span>Tanggal Pemesanan:</span>
+                                    <span>{formatDate(item.createdAt.toISOString())}</span>
+                                </div>
+
+                                <div className="flex items-center justify-between text-sm font-medium text-gray-900 truncate">
+                                    <span>Tanggal Pengiriman:</span>
                                     <span>{formatDate(item.tanggal.toISOString())}</span>
                                 </div>
 

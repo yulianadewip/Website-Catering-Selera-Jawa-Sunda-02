@@ -146,3 +146,32 @@ export const tambahReservasi = async (
         return { error: "Gagal membuat pesanan" };
     }
 };
+
+export const validasiStatusPesanan = async (
+    id: string,
+    prevState: any,
+    formData: FormData
+) => {
+
+    const status = formData.get("status") as string;
+
+    if (!status) {
+        return {
+            errors: { status: ["Status wajib dipilih"] }
+        };
+    }
+
+    try {
+        await prisma.pesanan.update({
+            where: { id },
+            data: { status }
+        });
+
+    } catch (error) {
+        console.log(error);
+        return { message: "Terjadi kesalahan saat menyimpan validasi" };
+    }
+
+    revalidatePath("/admin/dashboard");
+    redirect("/admin/dashboard");
+};
